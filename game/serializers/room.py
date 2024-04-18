@@ -4,8 +4,9 @@ from game.models import Room
 
 
 class RoomSerializer(serializers.ModelSerializer):
-    model = Room
-    fields = "__all__"
+    class Meta:
+        model = Room
+        fields = "__all__"
 
     def to_representation(self, instance):
         from user.serializers import MiniUserSerializer

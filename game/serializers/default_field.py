@@ -4,5 +4,6 @@ from game.models import DefaultField
 
 
 class DefaultFieldSerializer(serializers.ModelSerializer):
-    model = DefaultField
-    fields = "__all__"
+    class Meta:
+        model = DefaultField
+        fields = "__all__"
