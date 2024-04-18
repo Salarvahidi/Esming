@@ -18,22 +18,3 @@ class GameSerializer(serializers.ModelSerializer):
         res["winner"] = MiniUserSerializer(instance.winner).data
         res["room"] = instance.room.room_name if instance.room else ""
         return res
-
-    def _result_bulk_create(self, game: Game, round_result):
-        bulk_result = []
-        for data in round_result:
-            bulk_result.append(
-                RoundResult(
-                    game=game,
-                    letter=data["letter"],
-                    data=data["data"],
-                    round_count=data["round_count"],
-                )
-            )
-        RoundResult.objects.bulk_create(bulk_result)
-
-    def create(self, validated_data):
-        round_result = validated_data.pop("round_result", [])
-        game = super().create(validated_data)
-        self._result_bulk_create(game, round_result)
-        return game
