@@ -10,12 +10,6 @@ class Game(models.Model):
         null=True,
         verbose_name=_("room"),
     )
-    round_result = models.ManyToManyField(
-        "game.RoundResult",
-        blank=True,
-        related_name="games",
-        verbose_name=_("round result"),
-    )
     winner = models.ForeignKey(
         "user.User", on_delete=models.SET_NULL, null=True, verbose_name=_("winner")
     )
